@@ -1,1 +1,1 @@
-Nesty-Project - Hệ thống quản lý và bán giày trực tuyến
+Nesty-Project - Hệ thống bán giày dép trực tuyến

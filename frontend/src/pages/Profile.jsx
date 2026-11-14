@@ -57,46 +57,167 @@ export default function Profile() {
         navigate("/login");
     };
 
-    if (loading) return <p style={{ textAlign: "center", marginTop: 50 }}>Đang tải thông tin...</p>;
+    if (loading) {
+        return (
+            <div style={styles.loadingContainer}>
+                <div style={styles.spinner}></div>
+                <span style={{ color: "#64748b", fontWeight: "500" }}>Đang tải thông tin...</span>
+            </div>
+        );
+    }
 
     return (
-        <div style={{ maxWidth: 450, margin: "40px auto", padding: 25, border: "1px solid #ccc", borderRadius: 8 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <h2>Hồ sơ cá nhân</h2>
-                <button onClick={handleLogout} style={{ padding: "6px 12px", background: "#dc3545", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer" }}>
-                    Đăng xuất
-                </button>
+        <div style={styles.pageContainer}>
+            <div style={styles.card}>
+                <div style={styles.headerRow}>
+                    <h2 style={styles.title}>Hồ sơ cá nhân</h2>
+                    <button onClick={handleLogout} style={styles.logoutButton}>
+                        Đăng xuất
+                    </button>
+                </div>
+                {message && <div style={styles.messageAlert}>{message}</div>}
+                <form onSubmit={handleUpdate} style={styles.form}>
+                    <div style={styles.inputGroup}>
+                        <label style={styles.label}>Họ và tên:</label>
+                        <input type="text" name="hoTen" value={formData.hoTen} onChange={handleChange} required style={styles.input} />
+                    </div>
+                    <div style={styles.inputGroup}>
+                        <label style={styles.label}>Số điện thoại:</label>
+                        <input type="text" name="soDienThoai" value={formData.soDienThoai} onChange={handleChange} style={styles.input} />
+                    </div>
+                    <div style={styles.inputGroup}>
+                        <label style={styles.label}>Email:</label>
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} style={styles.input} />
+                    </div>
+                    <div style={styles.inputGroup}>
+                        <label style={styles.label}>Ngày sinh:</label>
+                        <input type="date" name="ngaySinh" value={formData.ngaySinh} onChange={handleChange} style={styles.input} />
+                    </div>
+                    <div style={styles.inputGroup}>
+                        <label style={styles.label}>Giới tính:</label>
+                        <select name="gioiTinh" value={formData.gioiTinh} onChange={handleChange} style={styles.input}>
+                            <option value="">Chọn giới tính</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </div>
+                    <button type="submit" style={styles.submitButton}>
+                        Lưu thay đổi
+                    </button>
+                </form>
             </div>
-            {message && <p style={{ color: "green", fontWeight: "bold" }}>{message}</p>}
-            <form onSubmit={handleUpdate}>
-                <div style={{ marginBottom: 12 }}>
-                    <label>Họ và tên:</label>
-                    <input type="text" name="hoTen" value={formData.hoTen} onChange={handleChange} required style={{ width: "100%", padding: 8 }} />
-                </div>
-                <div style={{ marginBottom: 12 }}>
-                    <label>Số điện thoại:</label>
-                    <input type="text" name="soDienThoai" value={formData.soDienThoai} onChange={handleChange} style={{ width: "100%", padding: 8 }} />
-                </div>
-                <div style={{ marginBottom: 12 }}>
-                    <label>Email:</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} style={{ width: "100%", padding: 8 }} />
-                </div>
-                <div style={{ marginBottom: 12 }}>
-                    <label>Ngày sinh:</label>
-                    <input type="date" name="ngaySinh" value={formData.ngaySinh} onChange={handleChange} style={{ width: "100%", padding: 8 }} />
-                </div>
-                <div style={{ marginBottom: 12 }}>
-                    <label>Giới tính:</label>
-                    <select name="gioiTinh" value={formData.gioiTinh} onChange={handleChange} style={{ width: "100%", padding: 8 }}>
-                        <option value="">Chọn giới tính</option>
-                        <option value="Nam">Nam</option>
-                        <option value="Nữ">Nữ</option>
-                    </select>
-                </div>
-                <button type="submit" style={{ width: "100%", padding: 10, background: "#007bff", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer" }}>
-                    Lưu thay đổi
-                </button>
-            </form>
         </div>
     );
 }
+
+// Hệ thống CSS chuẩn Enterprise Design System
+const styles = {
+    pageContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "2rem 1rem",
+    },
+    card: {
+        width: "100%",
+        maxWidth: "500px",
+        backgroundColor: "#ffffff",
+        borderRadius: "16px",
+        padding: "2.25rem 2.5rem",
+        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05)",
+        border: "1px solid #e2e8f0",
+    },
+    headerRow: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "1.5rem",
+        borderBottom: "1px solid #f1f5f9",
+        paddingBottom: "1rem",
+    },
+    title: {
+        fontSize: "1.35rem",
+        fontWeight: "700",
+        color: "#0f172a",
+        margin: 0,
+    },
+    logoutButton: {
+        padding: "0.5rem 1rem",
+        backgroundColor: "#fef2f2",
+        color: "#dc2626",
+        border: "1px solid #fecaca",
+        borderRadius: "8px",
+        fontWeight: "600",
+        fontSize: "0.85rem",
+        cursor: "pointer",
+        transition: "all 0.2s ease",
+    },
+    messageAlert: {
+        backgroundColor: "#f0fdf4",
+        color: "#16a34a",
+        padding: "0.75rem 1rem",
+        borderRadius: "8px",
+        fontSize: "0.875rem",
+        fontWeight: "600",
+        marginBottom: "1.25rem",
+        border: "1px solid #bbf7d0",
+        textAlign: "center",
+    },
+    form: {
+        display: "flex",
+        flexDirection: "column",
+        gap: "1.25rem",
+    },
+    inputGroup: {
+        display: "flex",
+        flexDirection: "column",
+        gap: "6px",
+    },
+    label: {
+        fontSize: "0.875rem",
+        fontWeight: "600",
+        color: "#334155",
+    },
+    input: {
+        width: "100%",
+        padding: "0.75rem 1rem",
+        fontSize: "0.95rem",
+        borderRadius: "8px",
+        border: "1px solid #cbd5e1",
+        backgroundColor: "#f8fafc",
+        color: "#0f172a",
+        outline: "none",
+        boxSizing: "border-box",
+        transition: "all 0.2s ease",
+    },
+    submitButton: {
+        width: "100%",
+        padding: "0.85rem",
+        backgroundColor: "#2563eb",
+        color: "#ffffff",
+        border: "none",
+        borderRadius: "8px",
+        fontWeight: "700",
+        fontSize: "0.95rem",
+        cursor: "pointer",
+        boxShadow: "0 4px 6px -1px rgba(37, 99, 235, 0.2)",
+        marginTop: "0.5rem",
+        transition: "background-color 0.2s ease",
+    },
+    loadingContainer: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "350px",
+        gap: "10px",
+    },
+    spinner: {
+        width: "36px",
+        height: "36px",
+        border: "3px solid #e2e8f0",
+        borderTop: "3px solid #2563eb",
+        borderRadius: "50%",
+        animation: "spin 0.8s linear infinite",
+    },
+};

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nesty", "Nesty.csproj", "{CB429654-FCAD-490A-9F8F-AFCD3DC468B7}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nesty.Domain", "..\Nesty.Domain\Nesty.Domain.csproj", "{3298F182-6D15-48AA-A07A-27EE53444053}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nesty.Infrastructure", "..\Nesty.Infrastructure\Nesty.Infrastructure.csproj", "{D188A8FC-B161-43A2-8043-AF0ED240B85E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nesty.Tests", "..\Nesty.Tests\Nesty.Tests.csproj", "{819EF739-D6CC-4C20-9ACE-95F4DA82B4DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D188A8FC-B161-43A2-8043-AF0ED240B85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D188A8FC-B161-43A2-8043-AF0ED240B85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D188A8FC-B161-43A2-8043-AF0ED240B85E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{819EF739-D6CC-4C20-9ACE-95F4DA82B4DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819EF739-D6CC-4C20-9ACE-95F4DA82B4DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819EF739-D6CC-4C20-9ACE-95F4DA82B4DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819EF739-D6CC-4C20-9ACE-95F4DA82B4DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -77,7 +77,7 @@ function ProductListPage() {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="w-full px-6 md:px-10 lg:px-14 py-8">
             <h1 className="text-3xl font-extrabold text-gray-900 mb-8">Danh sách sản phẩm</h1>
 
             {error && <p className="text-red-500 mb-4 bg-red-50 p-3 rounded">{error}</p>}
@@ -126,7 +126,7 @@ function ProductListPage() {
                     <p className="text-gray-500 text-lg">Không tìm thấy sản phẩm nào phù hợp.</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                     {products.map(product => (
                         <ProductCard key={product.sanPhamID} product={product} />
                     ))}

@@ -14,16 +14,16 @@ function StorefrontLayout() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900">
+        <div className="flex flex-col min-h-screen w-full bg-slate-50 text-slate-900">
             {/* 1. Top Announcement Bar */}
-            <div className="bg-slate-900 text-slate-200 text-xs sm:text-sm py-2 px-4 text-center font-medium tracking-wide">
+            <div className="w-full bg-slate-900 text-slate-200 text-xs sm:text-sm py-2.5 px-6 text-center font-medium tracking-wide">
                 🚚 Miễn phí vận chuyển toàn quốc cho đơn hàng từ <span className="text-sky-400 font-bold">500.000đ</span> — Đổi trả miễn phí trong 30 ngày
             </div>
 
-            {/* 2. Header / Navbar */}
-            <header className="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-20 gap-4">
+            {/* 2. Header / Navbar (Full màn hình) */}
+            <header className="w-full bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+                <div className="w-full px-6 md:px-10 lg:px-14">
+                    <div className="flex justify-between items-center h-20 gap-6">
                         {/* Logo */}
                         <div className="flex-shrink-0 flex items-center">
                             <Link to="/" className="text-3xl sm:text-4xl font-black text-blue-600 tracking-tighter">
@@ -32,7 +32,7 @@ function StorefrontLayout() {
                         </div>
 
                         {/* Navigation Links */}
-                        <nav className="hidden lg:flex items-center space-x-7">
+                        <nav className="hidden lg:flex items-center space-x-8">
                             <Link to="/" className="text-slate-700 hover:text-blue-600 font-semibold text-base transition-colors">
                                 Trang chủ
                             </Link>
@@ -47,19 +47,19 @@ function StorefrontLayout() {
                             </Link>
                         </nav>
 
-                        {/* Thanh tìm kiếm nhanh */}
-                        <form onSubmit={handleSearch} className="hidden md:flex items-center flex-1 max-w-xs mx-2">
+                        {/* Thanh tìm kiếm nhanh (Mở rộng hơn cho cân đối màn hình rộng) */}
+                        <form onSubmit={handleSearch} className="hidden md:flex items-center flex-1 max-w-md mx-4">
                             <div className="relative w-full">
                                 <input
                                     type="text"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     placeholder="Tìm mẫu giày, thương hiệu..."
-                                    className="w-full bg-slate-100 text-sm text-slate-800 placeholder-slate-400 rounded-full pl-4 pr-10 py-2 border border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all"
+                                    className="w-full bg-slate-100 text-sm text-slate-800 placeholder-slate-400 rounded-full pl-5 pr-11 py-2.5 border border-transparent focus:border-blue-500 focus:bg-white focus:outline-none transition-all"
                                 />
                                 <button
                                     type="submit"
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600"
+                                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600"
                                     title="Tìm kiếm"
                                 >
                                     🔍
@@ -68,7 +68,7 @@ function StorefrontLayout() {
                         </form>
 
                         {/* Right side actions */}
-                        <div className="flex items-center space-x-3 sm:space-x-5">
+                        <div className="flex items-center space-x-4 sm:space-x-6">
                             <Link
                                 to="/cart"
                                 className="relative flex items-center gap-1.5 text-slate-700 hover:text-blue-600 font-semibold text-sm sm:text-base px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
@@ -88,7 +88,7 @@ function StorefrontLayout() {
 
                             <Link
                                 to="/login"
-                                className="bg-blue-600 text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 transition-all shadow-sm hover:shadow-md"
+                                className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 transition-all shadow-sm hover:shadow-md"
                             >
                                 Đăng nhập
                             </Link>
@@ -97,17 +97,17 @@ function StorefrontLayout() {
                 </div>
             </header>
 
-            {/* Main Content */}
-            <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            {/* Main Content (Full màn hình) */}
+            <main className="flex-grow w-full px-6 md:px-10 lg:px-14 py-8">
                 <Outlet />
             </main>
 
             <ChatbotWidget />
 
-            {/* 3. Footer 4 cột chuyên nghiệp */}
-            <footer className="bg-slate-900 text-slate-300 pt-14 pb-8 mt-auto border-t border-slate-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+            {/* 3. Footer 4 cột (Full màn hình) */}
+            <footer className="w-full bg-slate-900 text-slate-300 pt-14 pb-8 mt-auto border-t border-slate-800">
+                <div className="w-full px-6 md:px-10 lg:px-14">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-slate-800">
                         {/* Cột 1: Giới thiệu thương hiệu */}
                         <div className="space-y-4">
                             <h3 className="text-2xl font-black text-white tracking-tight">

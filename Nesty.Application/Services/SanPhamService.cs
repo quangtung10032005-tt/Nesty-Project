@@ -194,6 +194,7 @@
 
 
 
+
 using Nesty.Application.DTOs.SanPham;
 using Nesty.Application.Interfaces;
 using Nesty.Domain.Entities;
@@ -208,6 +209,7 @@ public class SanPhamService : ISanPhamService
         _unitOfWork = unitOfWork;
     }
 
+    // Lấy danh sách sản phẩm
     public async Task<List<SanPhamDto>> GetAllAsync(
         string? search)
     {
@@ -228,9 +230,19 @@ public class SanPhamService : ISanPhamService
         }).ToList();
     }
 
+    // Thêm sản phẩm
     public async Task<SanPhamDto> CreateAsync(
-    CreateSanPhamRequest request)
+        CreateSanPhamRequest request)
     {
+        // Kiểm tra tên sản phẩm
+        if (string.IsNullOrWhiteSpace(request.TenSanPham))
+            throw new Exception("Vui lòng nhập tên sản phẩm.");
+
+        // Kiểm tra đã chọn danh mục chưa
+        if (request.DanhMucID <= 0)
+            throw new Exception("Vui lòng chọn danh mục.");
+
+        // Kiểm tra danh mục có tồn tại không
         var danhMuc =
             await _unitOfWork.DanhMucs
                 .GetByIdAsync(request.DanhMucID);
@@ -238,6 +250,7 @@ public class SanPhamService : ISanPhamService
         if (danhMuc == null)
             throw new Exception("Danh mục không tồn tại.");
 
+        // Tạo sản phẩm mới
         var product = new SanPham
         {
             DanhMucID = request.DanhMucID,
@@ -265,9 +278,10 @@ public class SanPhamService : ISanPhamService
         };
     }
 
+    // Sửa sản phẩm
     public async Task<SanPhamDto?> UpdateAsync(
-    int id,
-    UpdateSanPhamRequest request)
+        int id,
+        UpdateSanPhamRequest request)
     {
         var product =
             await _unitOfWork.SanPhams
@@ -306,24 +320,31 @@ public class SanPhamService : ISanPhamService
         };
     }
 
-    // Thay đổi trạng thái linh hoạt: Đang hoạt động -> Vô hiệu hóa; Ngừng hoạt động -> Hoạt động lại
+    // Vô hiệu hóa hoặc kích hoạt lại sản phẩm
     public async Task<bool> DeleteAsync(int id)
     {
-        var product = await _unitOfWork.SanPhams.GetByIdAsync(id);
-        if (product == null) return false;
+        var product =
+            await _unitOfWork.SanPhams.GetByIdAsync(id);
+
+        if (product == null)
+            return false;
 
         // Đảo ngược trạng thái hiện tại
         product.TrangThai = !product.TrangThai;
         product.NgayCapNhat = DateTime.UtcNow;
 
         _unitOfWork.SanPhams.Update(product);
+
         await _unitOfWork.SaveChangesAsync();
+
         return true;
     }
 
+    // Lấy thông tin sản phẩm theo ID
     public async Task<SanPhamDto?> GetByIdAsync(int id)
     {
-        var product = await _unitOfWork.SanPhams.GetByIdAsync(id);
+        var product =
+            await _unitOfWork.SanPhams.GetByIdAsync(id);
 
         if (product == null)
             return null;
@@ -341,6 +362,7 @@ public class SanPhamService : ISanPhamService
         };
     }
 }
+
 
 
 
